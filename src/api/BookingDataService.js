@@ -6,7 +6,7 @@ class BookingDataService {
      * @returns A JSON array of booking objects
      */
     retrieveAllBookings() {
-        return axios.get(`http://localhost:8080/bookings`);
+        return axios.get(`https://api-hamncafe-test.herokuapp.com/bookings`);
     }
 
     /**
@@ -14,19 +14,19 @@ class BookingDataService {
      * @returns A JSON object of a Booking
      */
     retrieveBooking(id) {
-        return axios.get(`http://localhost:8080/bookings/${id}`);
+        return axios.get(`https://api-hamncafe-test.herokuapp.com/bookings/${id}`);
     }
 
     updateBooking(id,booking) {
-        return axios.put(`http://localhost:8080/bookings/${id}`, booking);
+        return axios.put(`https://api-hamncafe-test.herokuapp.com/bookings/${id}`, booking);
     }
 
     createBooking(booking) {
-        return axios.post(`http://localhost:8080/bookings`, booking);
+        return axios.post(`https://api-hamncafe-test.herokuapp.com/bookings`, booking);
     }
 
     deleteBooking(id) {
-        return axios.delete(`http://localhost:8080/bookings/${id}`);
+        return axios.delete(`https://api-hamncafe-test.herokuapp.com/bookings/${id}`);
     }
 
 

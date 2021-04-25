@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 function HomeComponent() {
     const [message,setMessage] = useState("Hello world");
 
-    const clickMe = (text) => {
+    const clickMe = (message) => {
       setMessage(message)
     }
 
