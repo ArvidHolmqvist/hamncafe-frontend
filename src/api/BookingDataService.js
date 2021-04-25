@@ -6,6 +6,7 @@ class BookingDataService {
      * @returns A JSON array of booking objects
      */
     retrieveAllBookings() {
+        console.log("hello")
         return axios.get(`http://api-hamncafe-test.herokuapp.com/bookings`);
     }
 
