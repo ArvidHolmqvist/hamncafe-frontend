@@ -1,0 +1,31 @@
+import React,{useState} from 'react';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Dropdown from 'react-bootstrap/Dropdown';
+
+/**
+ * Represents page for selecting guests
+ * @param {*} props Object that represents the current booking
+ * @returns 
+ */
+export default function Guests(props) {
+    const [dropdownTitle, setDropDownTitle] = useState('Välj antal gäster');
+
+    let guestsAmount = [1,2,3,4,5,6,7,8];
+
+    function handleSelect(item){
+        console.log(item)
+        props.booking.guests = item
+        setDropDownTitle('Antal gäster: ' + item)
+    }
+    
+    return (
+        <div>
+            <h2 style={{color:'#5C5858'}}><span>Gäster</span></h2>
+            <DropdownButton title={dropdownTitle} id="dropdown-menu" onSelect={handleSelect}>
+                {guestsAmount.map(n => (
+                    <Dropdown.Item key={n.toString()} eventKey={n}> {n} </Dropdown.Item>
+                ))}
+            </DropdownButton>
+        </div>
+    )
+}
