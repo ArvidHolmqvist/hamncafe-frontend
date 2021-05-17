@@ -10,14 +10,14 @@ class BookingDataService {
      * @returns JSON array of Booking objects
      */
     retrieveAllBookings() {
-        return axios.get(`http://localhost:8080/bookings`);
+        return axios.get(`https://api-hamncafe-test.herokuapp.com/bookings`);
     }
 
     /**
      * @returns A JSON array of booking objects
      */
      retrieveAllAvailableTimes(date, time, guests) {
-        return axios.get(`http://localhost:8080/availableTimes`, {params: {
+        return axios.get(`https://api-hamncafe-test.herokuapp.com/availableTimes`, {params: {
             'date': date,
             'time': time,
             'guests': guests}
@@ -28,7 +28,7 @@ class BookingDataService {
      * @returns A JSON array of booking objects
      */
      retrieveAllAvailableDays(guests) {
-        return axios.get(`http://localhost:8080/availableDays`, {params: {
+        return axios.get(`https://api-hamncafe-test.herokuapp.com/availableDays`, {params: {
             'guests': guests}
         });
     }
@@ -40,7 +40,7 @@ class BookingDataService {
      * @returns JSON object of a Booking
      */
     retrieveBooking(id) {
-        return axios.get(`http://localhost:8080/bookings/${id}`);
+        return axios.get(`https://api-hamncafe-test.herokuapp.com/bookings/${id}`);
     }
 
     /**
@@ -52,7 +52,7 @@ class BookingDataService {
      * phone number (String), booking time (Time), and possible additional info
      */
     updateBooking(id,booking) {
-        return axios.put(`http://localhost:8080/bookings/${id}`, booking);
+        return axios.put(`https://api-hamncafe-test.herokuapp.com/bookings/${id}`, booking);
     }
 
     /**
@@ -63,7 +63,7 @@ class BookingDataService {
      * phone number (String), booking time (Time), and possible additional info
      */
     createBooking(booking) {
-        return axios.post(`http://localhost:8080/bookings`, booking);
+        return axios.post(`https://api-hamncafe-test.herokuapp.com/bookings`, booking);
     }
 
     /**
@@ -72,35 +72,35 @@ class BookingDataService {
      * @param {Number} id
      */
     deleteBooking(id) {
-        return axios.delete(`http://localhost:8080/bookings/id/${id}`);
+        return axios.delete(`https://api-hamncafe-test.herokuapp.com/bookings/id/${id}`);
     }
 
     getBookingsByDate(date){
-        return axios.get(`http://localhost:8080/bookings/date/${date}`);
+        return axios.get(`https://api-hamncafe-test.herokuapp.com/bookings/date/${date}`);
     }
 
     getBookingsByDateAndTime(date,time){
-        return axios.get(`http://localhost:8080/bookings/date/${date}/${time}`);
+        return axios.get(`https://api-hamncafe-test.herokuapp.com/bookings/date/${date}/${time}`);
     }
 
     getTimeSlotsByDate(date){
-        return axios.get(`http://localhost:8080/timeslots/date/${date}`);
+        return axios.get(`https://api-hamncafe-test.herokuapp.com/timeslots/date/${date}`);
     }
 
     getNumberOfBookedTablesByDateAndTime(date,time){
-        return axios.get(`http://localhost:8080/bookings/count/bookedtables/${date}/${time}`);
+        return axios.get(`https://api-hamncafe-test.herokuapp.com/bookings/count/bookedtables/${date}/${time}`);
     }
 
     getNumberOfGuestsByDateAndTime(date,time){
-        return axios.get(`http://localhost:8080/bookings/count/guests/${date}/${time}`);
+        return axios.get(`https://api-hamncafe-test.herokuapp.com/bookings/count/guests/${date}/${time}`);
     }
 
     checkPassword(password){
-        return axios.get('http://localhost:8080/checkpassword', {params: {'password': password}})
+        return axios.get('https://api-hamncafe-test.herokuapp.com/checkpassword', {params: {'password': password}})
     }
 
     checkAuthorizeUser(jwt){
-        return axios.get('http://localhost:8080/checkauthorizeuser', {params: {'jwt': jwt}})
+        return axios.get('https://api-hamncafe-test.herokuapp.com/checkauthorizeuser', {params: {'jwt': jwt}})
     }
 
 }
