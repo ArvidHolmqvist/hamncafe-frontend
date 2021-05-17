@@ -10,14 +10,14 @@ class BookingDataService {
      * @returns JSON array of Booking objects
      */
     retrieveAllBookings() {
-        return axios.get(`https://api-hamncafe-test.herokuapp.com/bookings`);
+        return axios.get(`http://localhost:8080/bookings`);
     }
 
     /**
      * @returns A JSON array of booking objects
      */
      retrieveAllAvailableTimes(date, time, guests) {
-        return axios.get(`https://api-hamncafe-test.herokuapp.com/availableTimes`, {params: {
+        return axios.get(`http://localhost:8080/availableTimes`, {params: {
             'date': date,
             'time': time,
             'guests': guests}
@@ -28,7 +28,7 @@ class BookingDataService {
      * @returns A JSON array of booking objects
      */
      retrieveAllAvailableDays(guests) {
-        return axios.get(`https://api-hamncafe-test.herokuapp.com/availableDays`, {params: {
+        return axios.get(`http://localhost:8080/availableDays`, {params: {
             'guests': guests}
         });
     }
@@ -40,7 +40,7 @@ class BookingDataService {
      * @returns JSON object of a Booking
      */
     retrieveBooking(id) {
-        return axios.get(`https://api-hamncafe-test.herokuapp.com/bookings/${id}`);
+        return axios.get(`http://localhost:8080/bookings/${id}`);
     }
 
     /**
@@ -48,20 +48,22 @@ class BookingDataService {
      * Updates the specified booking object
      * 
      * @param {Number} id 
-     * @param booking JSON object of a booking containing id, BookingDate, numberOfPeople, email 
+     * @param booking JSON object of a booking containing guest name (String), booking date (Date), numberOfPeople (int), 
+     * phone number (String), booking time (Time), and possible additional info
      */
     updateBooking(id,booking) {
-        return axios.put(`https://api-hamncafe-test.herokuapp.com/bookings/${id}`, booking);
+        return axios.put(`http://localhost:8080/bookings/${id}`, booking);
     }
 
     /**
      * Creates and adds new booking object
      * 
      * Value of id should always be 0, as it will be assigned by the backend
-     * @param booking JSON object of a booking containing id, BookingDate, numberOfPeople, email
+     * @param booking JSON object of a booking containing guest name (String), booking date (Date), numberOfPeople (int), 
+     * phone number (String), booking time (Time), and possible additional info
      */
     createBooking(booking) {
-        return axios.post(`https://api-hamncafe-test.herokuapp.com/bookings`, booking);
+        return axios.post(`http://localhost:8080/bookings`, booking);
     }
 
     /**
@@ -70,27 +72,36 @@ class BookingDataService {
      * @param {Number} id
      */
     deleteBooking(id) {
-        return axios.delete(`https://api-hamncafe-test.herokuapp.com/bookings/id/${id}`);
+        return axios.delete(`http://localhost:8080/bookings/id/${id}`);
     }
 
     getBookingsByDate(date){
-        return axios.get(`https://api-hamncafe-test.herokuapp.com/bookings/date/${date}`);
+        return axios.get(`http://localhost:8080/bookings/date/${date}`);
     }
 
     getBookingsByDateAndTime(date,time){
-        return axios.get(`https://api-hamncafe-test.herokuapp.com/bookings/date/${date}/${time}`);
+        return axios.get(`http://localhost:8080/bookings/date/${date}/${time}`);
     }
-
 
     getTimeSlotsByDate(date){
-        return axios.get(`https://api-hamncafe-test.herokuapp.com/timeslots/date/${date}`);
+        return axios.get(`http://localhost:8080/timeslots/date/${date}`);
     }
 
-    getNumberOfBookingsByDateAndTime(date,time){
-        return axios.get(`https://api-hamncafe-test.herokuapp.com/bookings/count/${date}/${time}`);
+    getNumberOfBookedTablesByDateAndTime(date,time){
+        return axios.get(`http://localhost:8080/bookings/count/bookedtables/${date}/${time}`);
     }
 
+    getNumberOfGuestsByDateAndTime(date,time){
+        return axios.get(`http://localhost:8080/bookings/count/guests/${date}/${time}`);
+    }
 
+    checkPassword(password){
+        return axios.get('http://localhost:8080/checkpassword', {params: {'password': password}})
+    }
+
+    checkAuthorizeUser(jwt){
+        return axios.get('http://localhost:8080/checkauthorizeuser', {params: {'jwt': jwt}})
+    }
 
 }
 

@@ -1,9 +1,10 @@
-import React,{useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import BookingDataService from '../../api/BookingDataService.js'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
+import moment from 'moment';
 
 /**
  * Represents the page for selecting time
@@ -17,16 +18,16 @@ export default function Timelist(props) {
 
     //If the date we are trying to get times for is today, input the current time
     //Else we input 00:00:00
-    function getDateTime(){
+    function getDateTime(date) {
         let dateTime = new Date()
-        if (props.booking.date !== dateTime.toLocaleDateString()){
-            dateTime.setTime(0,0,0,0)
+        if (date !== moment(dateTime).format('HH:mm:ss')) {
+            dateTime.setTime(0, 0, 0, 0)
         }
-        return dateTime.toLocaleTimeString()
+        return moment(dateTime).format('HH:mm:ss')
     }
 
     useEffect(() => {
-        if (props.booking.time !== ''){
+        if (props.booking.time !== '') {
             setDropDownTitle('Tid: ' + props.booking.time)
             setDisabled(false)
         }
@@ -37,9 +38,9 @@ export default function Timelist(props) {
                     setTimelist(response.data)
                 }
             )
-    });
+    },[]);
 
-    function handleSelect(item){
+    function handleSelect(item) {
         props.booking.time = item
         setDropDownTitle('Tid: ' + item)
         setDisabled(false)
@@ -47,11 +48,11 @@ export default function Timelist(props) {
 
     return (
         <div className="Timelist">
-            <DropdownButton title={dropdownTitle} id="dropdown-menu" onSelect={handleSelect}>
-                {timelist.map(n => (
-                    <Dropdown.Item key={n.toString()} eventKey={n.slice(0,-3)}> {n.slice(0,-3)} </Dropdown.Item>
-                ))}
-            </DropdownButton>
+                <DropdownButton title={dropdownTitle} id="dropdown-menu" onSelect={handleSelect}>
+                    {timelist.map(n => (
+                        <Dropdown.Item key={n.toString()} eventKey={n.slice(0, -3)}> {n.slice(0, -3)} </Dropdown.Item>
+                    ))}
+                </DropdownButton>
             <div>
                 <Link className='prevLink' to={'/date'}>
                     <Button>
@@ -62,9 +63,8 @@ export default function Timelist(props) {
                     <Button disabled={disabled}>
                         Nästa
                     </Button>
-                </Link> 
+                </Link>
             </div>
-            <h5>Om ni saknar lediga tider för önskat datum och antal gäster - ring oss! Telefon: <a href="tel:0304-570-07">0304 570 07</a></h5>
         </div>
     )
 }

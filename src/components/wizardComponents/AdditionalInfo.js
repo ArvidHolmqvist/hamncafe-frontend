@@ -1,12 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import {Button, Form} from 'react-bootstrap'
-import {Formik, ErrorMessage} from 'formik'
+import {Formik} from 'formik'
 import {useHistory} from 'react-router-dom'
 import * as Yup from 'yup'
 
-//Lägg till detta evt.
-//https://react-bootstrap.github.io/components/forms/#forms-validation
 /**
  * Represents the page for inputting information
  * @param {*} props Object that represents the current booking
@@ -18,7 +16,6 @@ export default function AdditionalInfo(props){
 
     function saveValues(values){
         props.booking.name = values.name
-        props.booking.email = values.email
         props.booking.tel = values.tel
         props.booking.info = values.info
     }
@@ -28,10 +25,6 @@ export default function AdditionalInfo(props){
         .min(2, '*Namn måste vara minst 2 tecken')
         .max(100, '*Namn kan inte vara mer än 100 tecken')
         .required('*Du måste ange ett namn'),
-        email: Yup.string()
-        .email('*E-post adressen är inte giltig')
-        .max(100, '*E-post kan inte vara mer än 100 tecken')
-        .required('*Du måste ange en e-postadress'),
         tel: Yup.string()
         .matches(numberRegExp, '*Telefonnummer är inte giltigt')
         .required('*Du måste ange ett telefonnummer'),
@@ -42,12 +35,11 @@ export default function AdditionalInfo(props){
     return (
         <div>
             <Formik
-                initialValues={{ name:props.booking.name, email:props.booking.email, tel:props.booking.tel, info:props.booking.info}}
+                initialValues={{ name:props.booking.name, tel:props.booking.tel, info:props.booking.info}}
                 validationSchema={validationSchema}
                 onSubmit={(values, {setSubmitting, resetForm}) => {
                     setSubmitting(true);
                     props.booking.name = values.name
-                    props.booking.email = values.email
                     props.booking.tel = values.tel
                     props.booking.info = values.info
                     setSubmitting(false)
@@ -75,20 +67,6 @@ export default function AdditionalInfo(props){
                             />
                             {touched.name && errors.name ? (
                             <div className="error-message">{errors.name}</div>
-                            ): null}
-                        </Form.Group>
-                        <Form.Group controlId="email">
-                            <Form.Label>E-post</Form.Label>
-                            <Form.Control 
-                                type='text'
-                                name='email'
-                                placeholder='Skriv in e-post'
-                                onChange={handleChange}
-                                value={values.email}
-                                className={touched.email && errors.email ? "has-error" : null}
-                            />
-                            {touched.email && errors.email ? (
-                            <div className="error-message">{errors.email}</div>
                             ): null}
                         </Form.Group>
                         <Form.Group controlId="tel">
